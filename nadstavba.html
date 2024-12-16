@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Program nadstavby</title>
+  <style>
+    .list-container {
+	  float:left;
+	  margin-right: 20px;
+    }
+
+    .list-row {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: #f9f9f9;
+      cursor: grab;
+    }
+	
+	 .home {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      cursor: grab;
+	  text-align:right;
+    }
+    .away {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      cursor: grab;
+    }
+	
+	.divider {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      cursor: grab;
+    }
+
+    .number {
+      width: 30px;
+      text-align: center;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;      
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 2px;
+      border-radius: 5px;
+    }
+	
+   .placeholders {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px auto;
+	  padding: 10px
+    }
+
+    .placeholder-pair {
+      display: flex;
+      align-items: right;
+      flex: 1;
+      justify-content: space-between;
+      min-width: 250px;
+      border: 1px dashed #ccc;
+      padding: 10px;
+      background: #f9f9f9;
+    }
+	
+	.match {
+		display: flex;
+	}
+	
+	.divider {
+		padding: 10px
+	}
+	
+	.home {
+		text-align: right;
+	}
+	
+	.away {
+		text-align: left;
+	}
+	
+	.round-title {
+		 font-weight: bold;
+	}
+	
+	.round-date {
+		 font-weight: italic;
+	}
+	
+	.big-screen {
+        margin-left: 3px 
+     } 
+	
+	.small-screen { 
+        margin-left: 3px
+     }
+	
+	@media screen and (max-width: 768px) {
+       .big-screen {
+        display: none; 
+     } 
+		.placeholder {
+			min-width:70px;
+		}
+	  .list-container {
+		max-width: 120px;
+	  }
+	}
+	@media screen and (min-width: 769px) {
+     .small-screen { 
+        display: none;
+     }
+	 .placeholder {
+			min-width:150px;
+		}
+	 .list-container {
+		max-width: 200px;
+	  }
+	}
+	 
+	.vertical-line {
+            width: 4px;
+            /* Adjust the width as needed */
+			
+			height: 0.8lh; 			
+          
+            margin: 0 auto;
+            /* Center the line horizontally */
+          display: none; 
+            transform: rotate(180deg);
+            /* Rotate the line to make it vertical */
+          
+        }
+}
+}
+	
+  </style>
+</head>
+<body>
+  <div class="list-container">
+  Ťahaním uprav konečnú tabuľku základnej časti:
+    <div id="sortable-list">
+      <div class="list-row" data-id="1">
+		<div class="number">1</div>
+		<div class="content" draggable="true"> 	
+			<img src="img/slo.png">
+			<span class="big-screen">Slovan</span>
+			<span class="small-screen">SLO</span>
+		</div>
+	  </div>	  
+      <div class="list-row" data-id="2">
+	    <div class="number">2</div> 
+		<div class="content" draggable="true">			
+			<img src="img/zil.png">	
+			<span class="big-screen">Žilina</span>
+			<span class="small-screen">ZIL</span>
+		</div>
+	  </div>
+	  <div class="list-row" data-id="3">
+	    <div class="number">3</div> 
+		<div class="content" draggable="true"> 				
+			<img src="img/trn.png">
+			<span class="big-screen">Trnava</span>
+			<span class="small-screen">TRN</span>
+		</div>
+	  </div>
+	  <div class="list-row" data-id="4">
+	    <div class="number">4</div> 
+		<div class="content" draggable="true"> 
+			<img src="img/dac.png">		
+			<span class="big-screen">Dunajská Streda</span>
+			<span class="small-screen">DAC</span>
+		</div>
+	  </div>
+      <div class="list-row" data-id="5">
+	    <div class="number">5</div> 
+		<div class="content" draggable="true"> 
+			<img src="img/pod.png">
+			<span class="big-screen">Podbrezová</span>
+			<span class="small-screen">POD</span>
+	    </div>
+      </div>  
+	  <div class="list-row" data-id="6">
+	    <div class="number">6</div> 
+		<div class="content" draggable="true"> 
+			<img src="img/mic.png">
+			<span class="big-screen">Michalovce</span>
+			<span class="small-screen">MIC</span>
+		</div>
+	  </div>
+	  <div class="list-row" data-id="7">
+	    <div class="number">7</div> 
+		<div class="content" draggable="true">  
+			<img src="img/kos.png">
+			<span class="big-screen">Košice</span>
+			<span class="small-screen">KOS</span>
+		</div>
+	  </div>	  	  
+	  <div class="list-row" data-id="8">
+	    <div class="number">8</div> 
+		<div class="content" draggable="true"> 
+			<img src="img/bby.png">	
+			<span class="big-screen">Banská Bystrica</span>
+			<span class="small-screen">BBY</span>
+		</div>
+	  </div>
+	  <div class="list-row" data-id="9">
+	    <div class="number">9</div> 
+		<div class="content" draggable="true"> 
+			<img src="img/ruz.png">
+			<span class="big-screen">Ružomberok</span>
+			<span class="small-screen">RUZ</span>
+		</div>
+	  </div>
+	  <div class="list-row" data-id="10">
+	    <div class="number">10</div> 
+		<div class="content" draggable="true">
+			<img src="img/kom.png">		
+			<span class="big-screen">Komárno</span>
+			<span class="small-screen">KOM</span>
+		</div>
+	  </div>
+	  <div class="list-row" data-id="11">
+	    <div class="number">11</div> 
+		<div class="content" draggable="true"> 
+			<img src="img/tre.png">		
+			<span class="big-screen">Trenčín</span>
+			<span class="small-screen">TRE</span>
+		</div>
+	  </div>
+	  <div class="list-row" data-id="12">
+	    <div class="number">12</div> 
+		<div class="content" draggable="true"> 
+			<img src="img/ska.png">		
+			<span class="big-screen">Skalica</span>
+			<span class="small-screen">SKA</span>
+		</div>
+	  </div>
+		
+      <!-- Add up to 12 items -->
+    </div>
+  </div>
+  
+  <div class="placeholders" id="placeholder-container">
+	<div class="round">
+		<span class="round-title">1. kolo</span><br>
+		<span class="round-date">8. - 9. marca</span>
+		<div class="match">
+			<div id="element-6" class="placeholder home"></div><div class="divider"> - </div><div id="element-1" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-3" class="placeholder home"></div><div class="divider"> - </div><div id="element-4" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-2" class="placeholder home"></div><div class="divider"> - </div><div id="element-5" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-9" class="placeholder home"></div><div class="divider">  -  </div><div id="element-8" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-12" class="placeholder home"></div><div class="divider"> - </div><div id="element-11" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-10" class="placeholder home"></div><div class="divider"> - </div><div id="element-7" class="placeholder away"></div>
+		</div>
+	</div> 
+	<div class="round">
+		<span class="round-title">2. kolo</span><br>
+		<span class="round-date">15. - 16. marca</span>
+		<div class="match">
+			<div id="element-1" class="placeholder home"></div><div class="divider"> - </div><div id="element-3" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-5" class="placeholder home"></div><div class="divider"> - </div><div id="element-6" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-4" class="placeholder home"></div><div class="divider"> - </div><div id="element-2" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-8" class="placeholder home"></div><div class="divider">  -  </div><div id="element-12" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-7" class="placeholder home"></div><div class="divider"> - </div><div id="element-9" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-11" class="placeholder home"></div><div class="divider"> - </div><div id="element-10" class="placeholder away"></div>
+		</div>
+	</div>
+	<div class="round">
+		<span class="round-title">3. kolo</span><br>
+		<span class="round-date">29. - 30. marca</span>
+		<div class="match">
+			<div id="element-1" class="placeholder home"></div><div class="divider"> - </div><div id="element-5" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-6" class="placeholder home"></div><div class="divider"> - </div><div id="element-4" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-3" class="placeholder home"></div><div class="divider"> - </div><div id="element-2" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-8" class="placeholder home"></div><div class="divider">  -  </div><div id="element-7" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-9" class="placeholder home"></div><div class="divider"> - </div><div id="element-11" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-12" class="placeholder home"></div><div class="divider"> - </div><div id="element-10" class="placeholder away"></div>
+		</div>
+	</div>
+	<div class="round">
+		<span class="round-title">4. kolo</span><br>
+		<span class="round-date">5. - 6. apríla</span>
+		<div class="match">
+			<div id="element-4" class="placeholder home"></div><div class="divider"> - </div><div id="element-5" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-6" class="placeholder home"></div><div class="divider"> - </div><div id="element-3" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-2" class="placeholder home"></div><div class="divider"> - </div><div id="element-1" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-11" class="placeholder home"></div><div class="divider">  -  </div><div id="element-7" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-9" class="placeholder home"></div><div class="divider"> - </div><div id="element-12" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-10" class="placeholder home"></div><div class="divider"> - </div><div id="element-8" class="placeholder away"></div>
+		</div>
+	</div>
+	<div class="round">
+		<span class="round-title">5. kolo</span><br>
+		<span class="round-date">12. - 13. apríla</span>
+		<div class="match">
+			<div id="element-5" class="placeholder home"></div><div class="divider"> - </div><div id="element-3" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-2" class="placeholder home"></div><div class="divider"> - </div><div id="element-6" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-1" class="placeholder home"></div><div class="divider"> - </div><div id="element-4" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-7" class="placeholder home"></div><div class="divider">  -  </div><div id="element-12" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-10" class="placeholder home"></div><div class="divider"> - </div><div id="element-9" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-8" class="placeholder home"></div><div class="divider"> - </div><div id="element-11" class="placeholder away"></div>
+		</div>
+	</div>
+	<div class="round">
+		<span class="round-title">6. kolo</span><br>
+		<span class="round-date">19. - 20. marca</span>
+		<div class="match">
+			<div id="element-5" class="placeholder home"></div><div class="divider"> - </div><div id="element-2" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-3" class="placeholder home"></div><div class="divider"> - </div><div id="element-1" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-4" class="placeholder home"></div><div class="divider"> - </div><div id="element-6" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-7" class="placeholder home"></div><div class="divider">  -  </div><div id="element-10" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-12" class="placeholder home"></div><div class="divider"> - </div><div id="element-8" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-11" class="placeholder home"></div><div class="divider"> - </div><div id="element-9" class="placeholder away"></div>
+		</div>
+	</div>
+	<div class="round">
+		<span class="round-title">7. kolo</span><br>
+		<span class="round-date">26. - 27. apríla</span>
+		<div class="match">
+			<div id="element-4" class="placeholder home"></div><div class="divider"> - </div><div id="element-1" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-2" class="placeholder home"></div><div class="divider"> - </div><div id="element-3" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-6" class="placeholder home"></div><div class="divider"> - </div><div id="element-5" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-11" class="placeholder home"></div><div class="divider">  -  </div><div id="element-8" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-10" class="placeholder home"></div><div class="divider"> - </div><div id="element-12" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-9" class="placeholder home"></div><div class="divider"> - </div><div id="element-7" class="placeholder away"></div>
+		</div>
+	</div>
+	<div class="round">
+		<span class="round-title">8. kolo</span><br>
+		<span class="round-date">3. - 4. mája</span>
+		<div class="match">
+			<div id="element-3" class="placeholder home"></div><div class="divider"> - </div><div id="element-6" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-1" class="placeholder home"></div><div class="divider"> - </div><div id="element-2" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-5" class="placeholder home"></div><div class="divider"> - </div><div id="element-4" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-12" class="placeholder home"></div><div class="divider">  -  </div><div id="element-9" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-8" class="placeholder home"></div><div class="divider"> - </div><div id="element-10" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-7" class="placeholder home"></div><div class="divider"> - </div><div id="element-11" class="placeholder away"></div>
+		</div>
+	</div>
+	<div class="round">
+		<span class="round-title">9. kolo</span><br>
+		<span class="round-date">10. - 11. mája</span>
+		<div class="match">
+			<div id="element-4" class="placeholder home"></div><div class="divider"> - </div><div id="element-3" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-6" class="placeholder home"></div><div class="divider"> - </div><div id="element-2" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-5" class="placeholder home"></div><div class="divider"> - </div><div id="element-1" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-11" class="placeholder home"></div><div class="divider">  -  </div><div id="element-12" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-9" class="placeholder home"></div><div class="divider"> - </div><div id="element-10" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-7" class="placeholder home"></div><div class="divider"> - </div><div id="element-8" class="placeholder away"></div>
+		</div>
+	</div>
+	<div class="round">
+		<span class="round-title">10. kolo</span><br>
+		<span class="round-date">17. - 18. mája</span>
+		<div class="match">
+			<div id="element-2" class="placeholder home"></div><div class="divider"> - </div><div id="element-4" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-1" class="placeholder home"></div><div class="divider"> - </div><div id="element-6" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-3" class="placeholder home"></div><div class="divider"> - </div><div id="element-5" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-10" class="placeholder home"></div><div class="divider">  -  </div><div id="element-11" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-8" class="placeholder home"></div><div class="divider"> - </div><div id="element-9" class="placeholder away"></div>
+		</div>
+		<div class="match">
+			<div id="element-12" class="placeholder home"></div><div class="divider"> - </div><div id="element-7" class="placeholder away"></div>
+		</div>
+	</div>
+  </div>
+
+ <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+  <script>
+	const width = window.innerWidth;
+  
+     // Function to update placeholders based on the current order
+    function updatePlaceholders() {
+      
+      const rowMap = {}; // Map of row data (number -> content)
+
+      // Re-fetch the list rows after reorder to get the updated order
+      const rows = document.querySelectorAll('#sortable-list .list-row');
+
+      // Check if rows is empty
+      if (rows.length === 0) {
+        console.error('No rows found! Make sure the rows are present in the DOM.');
+        return;
+      }
+
+      // Loop through the rows to update the rowMap using the 'number' field as the key
+      rows.forEach(row => {
+        const order = row.querySelector('.number').textContent; // Use the number as the order
+        const content = row.querySelector('.content').innerHTML; // Get content of the row
+
+        rowMap[order] = content; // Store content by order in rowMap
+      });
+
+
+      // Iterate through all placeholders and update them
+      document.querySelectorAll('.placeholder').forEach(placeholder => {
+        const placeholderId = placeholder.id.replace('element-', ''); // Get the number from element-#
+        
+        if (rowMap[placeholderId]) {
+          placeholder.innerHTML = rowMap[placeholderId]; // Update placeholder content
+        }
+      });
+    }
+
+    // Function to update the numbers after reorder
+    function updateNumbers() {
+      const rows = document.querySelectorAll('#sortable-list .list-row');
+      rows.forEach((row, index) => {
+        const numberElement = row.querySelector('.number');
+        if (numberElement) {
+          numberElement.textContent = index + 1; // Update the number to match the new order
+        }
+      });
+    }
+
+    // Initialize Sortable.js
+    const sortable = new Sortable(document.getElementById('sortable-list'), {
+      animation: 150,
+      ghostClass: 'sortable-ghost',
+      onEnd: function(evt) {
+        
+        // Rebuild the rowMap after reorder
+       
+        updateNumbers(); // Update numbers after reorder
+		 updatePlaceholders(); // Update placeholders after reorder
+      },
+    });
+
+    // Call updatePlaceholders when the page loads to populate placeholders initially
+    window.addEventListener('DOMContentLoaded', function() {
+      
+      updateNumbers(); // Update numbers initially
+	  updatePlaceholders(); // Populate placeholders based on initial order
+    });
+  </script>
+</body>
+
+  </script>
+</body>
+</html>
